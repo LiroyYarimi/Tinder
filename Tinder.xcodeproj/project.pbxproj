@@ -12,6 +12,7 @@
 		C8FAD9FD22133D840067CBB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8FAD9FB22133D840067CBB3 /* Main.storyboard */; };
 		C8FAD9FF22133D860067CBB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8FAD9FE22133D860067CBB3 /* Assets.xcassets */; };
 		C8FADA0222133D860067CBB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8FADA0022133D860067CBB3 /* LaunchScreen.storyboard */; };
+		C8FADA0B2213423D0067CBB3 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FADA0A2213423D0067CBB3 /* Extensions+UIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		C8FAD9FE22133D860067CBB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8FADA0122133D860067CBB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C8FADA0322133D860067CBB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8FADA0A2213423D0067CBB3 /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		C8FAD9F622133D840067CBB3 /* Tinder */ = {
 			isa = PBXGroup;
 			children = (
+				C8FADA09221341930067CBB3 /* Extension */,
 				C8FAD9F722133D840067CBB3 /* AppDelegate.swift */,
 				C8FAD9F922133D840067CBB3 /* ViewController.swift */,
 				C8FAD9FB22133D840067CBB3 /* Main.storyboard */,
@@ -62,6 +65,14 @@
 				C8FADA0322133D860067CBB3 /* Info.plist */,
 			);
 			path = Tinder;
+			sourceTree = "<group>";
+		};
+		C8FADA09221341930067CBB3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C8FADA0A2213423D0067CBB3 /* Extensions+UIView.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +148,7 @@
 			files = (
 				C8FAD9FA22133D840067CBB3 /* ViewController.swift in Sources */,
 				C8FAD9F822133D840067CBB3 /* AppDelegate.swift in Sources */,
+				C8FADA0B2213423D0067CBB3 /* Extensions+UIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
