@@ -16,6 +16,7 @@
 		C8FADA0E2214029D0067CBB3 /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FADA0D2214029D0067CBB3 /* HomeBottomControlsStackView.swift */; };
 		C8FADA10221405F00067CBB3 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FADA0F221405F00067CBB3 /* HomeScreenView.swift */; };
 		C8FADA1222140A580067CBB3 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FADA1122140A580067CBB3 /* TopNavigationStackView.swift */; };
+		C8FADA14221424EE0067CBB3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FADA13221424EE0067CBB3 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		C8FADA0D2214029D0067CBB3 /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
 		C8FADA0F221405F00067CBB3 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		C8FADA1122140A580067CBB3 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
+		C8FADA13221424EE0067CBB3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +87,10 @@
 		C8FADA0C2214025F0067CBB3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C8FADA0D2214029D0067CBB3 /* HomeBottomControlsStackView.swift */,
 				C8FADA0F221405F00067CBB3 /* HomeScreenView.swift */,
+				C8FADA0D2214029D0067CBB3 /* HomeBottomControlsStackView.swift */,
 				C8FADA1122140A580067CBB3 /* TopNavigationStackView.swift */,
+				C8FADA13221424EE0067CBB3 /* CardView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8FADA14221424EE0067CBB3 /* CardView.swift in Sources */,
 				C8FAD9FA22133D840067CBB3 /* ViewController.swift in Sources */,
 				C8FADA1222140A580067CBB3 /* TopNavigationStackView.swift in Sources */,
 				C8FADA0E2214029D0067CBB3 /* HomeBottomControlsStackView.swift in Sources */,

@@ -12,15 +12,23 @@ class ViewController: UIViewController {
     
     let topStackView = TopNavigationStackView()
     let buttonsStackView = HomeBottomControlsStackView()
-    let blueView = UIView()
+    let cardDeckView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        HomeScreenView.setupHomeScreenLayout(view: view, topStackView: topStackView, buttonsStackView: buttonsStackView,blueView: blueView)
+        HomeScreenView.setupHomeScreenLayout(view: view, topStackView: topStackView, buttonsStackView: buttonsStackView,cardDeckView: cardDeckView)
+        
+        setupCards()
         
     }
 
+    fileprivate func setupCards(){
+        
+        let cardView = CardView(frame: .zero)
+        cardDeckView.addSubview(cardView)
+        cardView.fillSuperview()
+    }
 
 }
 
