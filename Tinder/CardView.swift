@@ -10,7 +10,9 @@ import UIKit
 
 class CardView: UIView {
     
-    fileprivate let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
+    let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
+    let informationLabel = UILabel()
+    
     
     //configurations
     fileprivate let threshold:CGFloat = 80
@@ -22,19 +24,39 @@ class CardView: UIView {
         layer.cornerRadius = 10
         clipsToBounds = true
         
-        addSubview(imageView)
-        imageView.fillSuperview()
+        imageViewSetup()
+        informationLabelSetup()
+
         
         //add pan gesture (make the image move as user press it)
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
     }
     
+    fileprivate func informationLabelSetup(){
+        
+        addSubview(informationLabel)
+        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
+        informationLabel.text = "Test name test name"
+        informationLabel.textColor = .white
+        informationLabel.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
+        informationLabel.numberOfLines = 0
+    }
     
+    fileprivate func imageViewSetup(){
+        
+        addSubview(imageView)
+        imageView.fillSuperview()
+        imageView.contentMode = .scaleAspectFill
+    }
+    
+    
+    //MARK:- Add pan (draging) gesture to card
     
     //add pan gesture function
     
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer){
+        
         
         switch gesture.state {
         case .changed:
@@ -68,16 +90,16 @@ class CardView: UIView {
         
         let x = gesture.translation(in: nil).x
         var shouldDismissCard = false
-        var moveTo: CGFloat = 1000 // move right
+        var moveTo: CGFloat = 600 // move right
         
         if x > threshold{
             shouldDismissCard = true
         }else if x < -threshold{
             shouldDismissCard = true
-            moveTo = -1000 //move left
+            moveTo = -moveTo //move left
         }
  
-        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
             if shouldDismissCard{
                 
                 self.frame = CGRect(x: moveTo, y: 0, width: self.frame.width, height: self.frame.height)
@@ -87,7 +109,10 @@ class CardView: UIView {
             }
         }) { (_) in
             self.transform = .identity
-            self.frame = CGRect(x: 0, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
+            if shouldDismissCard{
+                self.removeFromSuperview()//delete the old card
+            }
+//            self.frame = CGRect(x: 0, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
         }
     }
     
