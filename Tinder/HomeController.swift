@@ -14,10 +14,27 @@ class HomeController: UIViewController {
     let buttonsStackView = HomeBottomControlsStackView()
     let cardDeckView = UIView()
     
-    let users = [
-        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"),
-        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c")
-    ]
+    
+//    let cardViewModels = ([
+//        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"),
+//        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c"),
+//        Advertiser(title: "Royal Cruse", brandName: "Your Next Vication", posterPhotoName: "Cruse"),
+//        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c")
+//
+//
+//        ] as [producesCardViewModel]).map { (producer) -> CardViewModel in
+//            return producer.toCardViewModel()
+//    }
+    let cardViewModels: [CardViewModel] = {
+        let producers = [
+            User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"),
+            User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c"),
+            Advertiser(title: "Royal Cruse", brandName: "Your Next Vication", posterPhotoName: "Cruse"),
+            User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c")
+        ] as [producesCardViewModel]
+        let viewModels = producers.map({return $0.toCardViewModel()})
+        return viewModels
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,18 +47,12 @@ class HomeController: UIViewController {
 
     fileprivate func setupCards(){
         
-        users.forEach { (user) in
+        cardViewModels.forEach { (cardVM) in
             let cardView = CardView(frame: .zero)
-            cardView.imageView.image = UIImage(named: user.imageName)
-            cardView.informationLabel.text = "\(user.name) \(user.age)\n\(user.profession)"
-            
-            let attributedText = NSMutableAttributedString(string: user.name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
-            attributedText.append(NSMutableAttributedString(string: "  \(user.age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
-            attributedText.append(NSMutableAttributedString(string: "\n\(user.profession)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
-            cardView.informationLabel.attributedText = attributedText
-            
+            cardView.cardViewModel = cardVM
             cardDeckView.addSubview(cardView)
             cardView.fillSuperview()
+            
         }
         
         
