@@ -24,14 +24,15 @@ class CardView: UIView {
                 barsStackView.addArrangedSubview(barView)
             }
             barsStackView.arrangedSubviews.first?.backgroundColor = .white
+            
+            setupImageIndexObserver()
         }
     }
-    
+
     fileprivate let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
     fileprivate let informationLabel = UILabel()
     fileprivate let gradientLayer = CAGradientLayer()
     fileprivate let barsStackView = UIStackView()
-    fileprivate var imageIndex = 0
     fileprivate let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
     
     //configurations
@@ -56,26 +57,30 @@ class CardView: UIView {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
     
-    
+    //change images after tap
+    fileprivate func setupImageIndexObserver(){
+        
+        cardViewModel.imageIndexObserver = { [weak self] (index, image) in
+            self?.imageView.image = image
+            self?.barsStackView.arrangedSubviews.forEach({ (v) in
+                v.backgroundColor = self?.barDeselectedColor
+            })
+            self?.barsStackView.arrangedSubviews[index].backgroundColor = .white
+        }
+    }
     
     @objc fileprivate func handleTap(gesture: UITapGestureRecognizer){
         
         let tapLocation = gesture.location(in: nil)
         let shouldAdvanceNextPhoto = tapLocation.x > frame.width / 2 ? true : false
         if shouldAdvanceNextPhoto{
-            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
+            cardViewModel.advanceToNextPhoto()
         }else{
-            imageIndex = max(0, imageIndex - 1)
+            cardViewModel.goToPreviousPhoto()
         }
-        let imageName = cardViewModel.imageNames[imageIndex]
-        imageView.image = UIImage(named: imageName)
-        
-        barsStackView.arrangedSubviews.forEach { (v) in
-            v.backgroundColor = barDeselectedColor
-        }
-        barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
     }
     
+    //white rectangle on top
     fileprivate func setupBarsStackView(){
         
         addSubview(barsStackView)
@@ -86,7 +91,7 @@ class CardView: UIView {
         
     }
     
-    
+    //black shadow on bottom
     fileprivate func setupBlackGradientLayer(){
         
         
@@ -151,8 +156,6 @@ class CardView: UIView {
         let rotationalTransformation = CGAffineTransform(rotationAngle: angle)
         self.transform = rotationalTransformation.translatedBy(x: translation.x, y: translation.y)
         
-//        let translation = gesture.translation(in: nil)
-//        self.transform = CGAffineTransform(translationX: translation.x, y: translation.y)
     }
     
     //return card to is place (or move it away) when user let go
@@ -182,7 +185,6 @@ class CardView: UIView {
             if shouldDismissCard{
                 self.removeFromSuperview()//delete the old card
             }
-//            self.frame = CGRect(x: 0, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
         }
     }
     
