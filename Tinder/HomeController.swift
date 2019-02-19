@@ -15,16 +15,6 @@ class HomeController: UIViewController {
     let cardDeckView = UIView()
     
     
-//    let cardViewModels = ([
-//        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"),
-//        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c"),
-//        Advertiser(title: "Royal Cruse", brandName: "Your Next Vication", posterPhotoName: "Cruse"),
-//        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c")
-//
-//
-//        ] as [producesCardViewModel]).map { (producer) -> CardViewModel in
-//            return producer.toCardViewModel()
-//    }
     let cardViewModels: [CardViewModel] = {
         let producers = [
             User(name: "Kelly", age: 23, profession: "Music DJ", imageNames: ["kelly1","kelly2","kelly3"]),
@@ -38,10 +28,19 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        topStackView.settingButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+        
         HomeScreenView.setupHomeScreenLayout(view: view, topStackView: topStackView, buttonsStackView: buttonsStackView,cardDeckView: cardDeckView)
         
         setupCards()
         
+    }
+    
+    @objc func handleSettings(){
+//        print("show setting")
+        
+        let registrationController = RegistrationController()
+        present(registrationController, animated:  true)
     }
 
     fileprivate func setupCards(){

@@ -11,6 +11,8 @@
 		C868D5D8221721E900AAC7C9 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868D5D7221721E900AAC7C9 /* CardViewModel.swift */; };
 		C868D5DA2218521100AAC7C9 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C868D5D92218521100AAC7C9 /* Advertiser.swift */; };
 		C868D5DC221854C000AAC7C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C868D5DB221854C000AAC7C9 /* Images.xcassets */; };
+		C8A58854221C521B0033AB7B /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A58853221C521B0033AB7B /* RegistrationController.swift */; };
+		C8A58856221C5EB30033AB7B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A58855221C5EB30033AB7B /* CustomTextField.swift */; };
 		C8FAD9F822133D840067CBB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FAD9F722133D840067CBB3 /* AppDelegate.swift */; };
 		C8FAD9FA22133D840067CBB3 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FAD9F922133D840067CBB3 /* HomeController.swift */; };
 		C8FAD9FD22133D840067CBB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8FAD9FB22133D840067CBB3 /* Main.storyboard */; };
@@ -27,6 +29,8 @@
 		C868D5D7221721E900AAC7C9 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		C868D5D92218521100AAC7C9 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		C868D5DB221854C000AAC7C9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C8A58853221C521B0033AB7B /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		C8A58855221C5EB30033AB7B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		C8FAD9F422133D840067CBB3 /* Tinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8FAD9F722133D840067CBB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8FAD9F922133D840067CBB3 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -56,6 +60,7 @@
 			children = (
 				C8FAD9F722133D840067CBB3 /* AppDelegate.swift */,
 				C8FAD9F922133D840067CBB3 /* HomeController.swift */,
+				C8A58853221C521B0033AB7B /* RegistrationController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 				C8FADA0D2214029D0067CBB3 /* HomeBottomControlsStackView.swift */,
 				C8FADA1122140A580067CBB3 /* TopNavigationStackView.swift */,
 				C8FADA13221424EE0067CBB3 /* CardView.swift */,
+				C8A58855221C5EB30033AB7B /* CustomTextField.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -205,7 +211,9 @@
 				C8FADA1222140A580067CBB3 /* TopNavigationStackView.swift in Sources */,
 				C8FADA0E2214029D0067CBB3 /* HomeBottomControlsStackView.swift in Sources */,
 				C868D5D52217169400AAC7C9 /* User.swift in Sources */,
+				C8A58854221C521B0033AB7B /* RegistrationController.swift in Sources */,
 				C8FADA10221405F00067CBB3 /* HomeScreenView.swift in Sources */,
+				C8A58856221C5EB30033AB7B /* CustomTextField.swift in Sources */,
 				C8FAD9F822133D840067CBB3 /* AppDelegate.swift in Sources */,
 				C8FADA0B2213423D0067CBB3 /* Extensions+UIView.swift in Sources */,
 				C868D5D8221721E900AAC7C9 /* CardViewModel.swift in Sources */,
