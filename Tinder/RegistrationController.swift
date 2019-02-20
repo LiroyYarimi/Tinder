@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import JGProgressHUD
 
 class RegistrationController: UIViewController {
     
@@ -33,7 +35,6 @@ class RegistrationController: UIViewController {
     lazy var registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
-//        button.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         button.backgroundColor = .lightGray
         button.setTitleColor(.gray, for: .disabled)
         button.isEnabled = false
@@ -42,6 +43,7 @@ class RegistrationController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         button.layer.cornerRadius = buttonsHeight/2
         button.heightAnchor.constraint(equalToConstant: buttonsHeight).isActive = true
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         return button
     }()
     
@@ -71,6 +73,8 @@ class RegistrationController: UIViewController {
         return tf
     }()
     
+
+    
     @objc fileprivate func handleTextChange(textField: UITextField){
         
         if textField == fullNameTextField{
@@ -94,21 +98,7 @@ class RegistrationController: UIViewController {
         setupRegistrationViewModelObserver()
     }
     
-    let registrationViewModel = RegistrationViewModel()
-    
-    fileprivate func setupRegistrationViewModelObserver(){
-        registrationViewModel.isFormValidObserver = { [unowned self] (isFormValid) in
-            
-            self.registerButton.isEnabled = isFormValid
-            if isFormValid{
-                self.registerButton.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
-                self.registerButton.setTitleColor(.white, for: .normal)
-            }else{
-                self.registerButton.backgroundColor = .lightGray
-                self.registerButton.setTitleColor(.gray, for: .normal)
-            }
-        }
-    }
+
     
     lazy var verticalStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [
@@ -165,6 +155,51 @@ class RegistrationController: UIViewController {
         gradientLayer.locations = [0,1]
         view.layer.addSublayer(gradientLayer)
         gradientLayer.frame = view.bounds
+    }
+    
+    //MARK:- Register function
+    
+    @objc fileprivate func handleRegister(){
+        
+        self.handleTapDismiss()
+        
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
+            
+            if let err = err{
+                print(err)
+                self.showHUDWithError(error: err)
+                return
+            }
+            print("Successfullt registered user: ",res?.user.uid ?? "")
+        }
+    }
+    
+    fileprivate func showHUDWithError(error: Error){
+        
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Failed Registration"
+        hud.detailTextLabel.text = error.localizedDescription
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 4)
+    }
+    
+    let registrationViewModel = RegistrationViewModel()
+    
+    fileprivate func setupRegistrationViewModelObserver(){
+        registrationViewModel.isFormValidObserver = { [unowned self] (isFormValid) in
+            
+            self.registerButton.isEnabled = isFormValid
+            if isFormValid{
+                self.registerButton.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+                self.registerButton.setTitleColor(.white, for: .normal)
+            }else{
+                self.registerButton.backgroundColor = .lightGray
+                self.registerButton.setTitleColor(.gray, for: .normal)
+            }
+        }
     }
     
     //MARK:- Keyboard functions
