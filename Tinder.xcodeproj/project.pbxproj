@@ -16,6 +16,7 @@
 		C8A58856221C5EB30033AB7B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A58855221C5EB30033AB7B /* CustomTextField.swift */; };
 		C8A58858221D65750033AB7B /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A58857221D65750033AB7B /* RegistrationViewModel.swift */; };
 		C8A5885A221D8ED50033AB7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C8A58859221D8ED50033AB7B /* GoogleService-Info.plist */; };
+		C8A5885C221EB1F90033AB7B /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A5885B221EB1F90033AB7B /* Bindable.swift */; };
 		C8FAD9F822133D840067CBB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FAD9F722133D840067CBB3 /* AppDelegate.swift */; };
 		C8FAD9FA22133D840067CBB3 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FAD9F922133D840067CBB3 /* HomeController.swift */; };
 		C8FAD9FD22133D840067CBB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8FAD9FB22133D840067CBB3 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 		C8A58855221C5EB30033AB7B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		C8A58857221D65750033AB7B /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		C8A58859221D8ED50033AB7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C8A5885B221EB1F90033AB7B /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		C8FAD9F422133D840067CBB3 /* Tinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8FAD9F722133D840067CBB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8FAD9F922133D840067CBB3 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			children = (
 				C868D5D7221721E900AAC7C9 /* CardViewModel.swift */,
 				C8A58857221D65750033AB7B /* RegistrationViewModel.swift */,
+				C8A5885B221EB1F90033AB7B /* Bindable.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				C868D5D52217169400AAC7C9 /* User.swift in Sources */,
 				C8A58854221C521B0033AB7B /* RegistrationController.swift in Sources */,
 				C8FADA10221405F00067CBB3 /* HomeScreenView.swift in Sources */,
+				C8A5885C221EB1F90033AB7B /* Bindable.swift in Sources */,
 				C8A58856221C5EB30033AB7B /* CustomTextField.swift in Sources */,
 				C8A58858221D65750033AB7B /* RegistrationViewModel.swift in Sources */,
 				C8FAD9F822133D840067CBB3 /* AppDelegate.swift in Sources */,
