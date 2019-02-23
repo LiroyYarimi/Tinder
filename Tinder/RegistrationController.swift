@@ -184,27 +184,60 @@ class RegistrationController: UIViewController {
         present(imagePickerController, animated: true)
     }
     
+    let registeringHUD = JGProgressHUD(style: .dark)
+    
     //MARK:- Register function
     
     @objc fileprivate func handleRegister(){
         
         self.handleTapDismiss()
-        
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
-            
+        registrationViewModel.performRegistration { [weak self] (err) in
             if let err = err{
-                print(err)
-                self.showHUDWithError(error: err)
+                self?.showHUDWithError(error: err)
                 return
             }
-            print("Successfullt registered user: ",res?.user.uid ?? "")
+            print("Finish registeration")
         }
+        
+//        registeringHUD.textLabel.text = "Register"
+//        registeringHUD.show(in: view)
+        
+//        Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
+//            
+//            if let err = err{
+//                print(err)
+//                self.showHUDWithError(error: err)
+//                return
+//            }
+//            print("Successfullt registered user: ",res?.user.uid ?? "")
+//            let filename = UUID().uuidString
+//            let ref = Storage.storage().reference(withPath: "/image/\(filename)")
+//            let imageData =  self.registrationViewModel.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
+////            print(imageData)
+//            ref.putData(imageData, metadata: nil, completion: { (_, err) in
+//                if let err = err{
+//                    self.showHUDWithError(error: err)
+//                    return
+//                }
+//                print("Finish uploading image to storage")
+//                ref.downloadURL(completion: { (url, err) in
+//                    if let err = err{
+//                        self.showHUDWithError(error: err)
+//                        return
+//                    }
+//                    
+//                    self.registrationViewModel.bindableIsRegistering.value = false
+//                    print("url: ",url?.absoluteString ?? "")
+//                    
+//                    
+//                })
+//            })
+//        }
     }
     
     fileprivate func showHUDWithError(error: Error){
+        
+        registeringHUD.dismiss()
         
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Failed Registration"
@@ -228,23 +261,18 @@ class RegistrationController: UIViewController {
                 self.registerButton.setTitleColor(.gray, for: .normal)
             }
         }
-//        registrationViewModel.isFormValidObserver = { [unowned self] (isFormValid) in
-//
-//            self.registerButton.isEnabled = isFormValid
-//            if isFormValid{
-//                self.registerButton.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
-//                self.registerButton.setTitleColor(.white, for: .normal)
-//            }else{
-//                self.registerButton.backgroundColor = .lightGray
-//                self.registerButton.setTitleColor(.gray, for: .normal)
-//            }
-//        }
         registrationViewModel.bindableImage.bind { [unowned self] (image) in
             self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
-//        registrationViewModel.imageObserver = { [unowned self] (image) in
-//            self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
-//        }
+        registrationViewModel.bindableIsRegistering.bind { [unowned self] (isRegistering) in
+            if isRegistering == true {
+                self.registeringHUD.textLabel.text = "Register"
+                self.registeringHUD.show(in: self.view)
+            }else{
+                self.registeringHUD.dismiss()
+            }
+        }
+        
         
     }
     
@@ -284,10 +312,10 @@ class RegistrationController: UIViewController {
         self.view.transform = CGAffineTransform(translationX: 0, y: -(difference + 8)) //move the view up
     }
     
-    //for avoid rotain (we need this for the Observers)
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-    }
+//    //for avoid rotain (we need this for the Observers)
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+////        NotificationCenter.default.removeObserver(self)
+//    }
 
 }
