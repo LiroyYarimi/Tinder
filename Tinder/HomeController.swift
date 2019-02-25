@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeController: UIViewController {
     
@@ -15,15 +16,17 @@ class HomeController: UIViewController {
     let cardDeckView = UIView()
     
     
-    let cardViewModels: [CardViewModel] = {
-        let producers = [
-            User(name: "Kelly", age: 23, profession: "Music DJ", imageNames: ["kelly1","kelly2","kelly3"]),
-            Advertiser(title: "Royal Cruse", brandName: "Your Next Vication", posterPhotoName: "Cruse"),
-            User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1","jane2","jane3"])
-        ] as [producesCardViewModel]
-        let viewModels = producers.map({return $0.toCardViewModel()})
-        return viewModels
-    }()
+//    let cardViewModels: [CardViewModel] = {
+//        let producers = [
+//            User(name: "Kelly", age: 23, profession: "Music DJ", imageNames: ["kelly1","kelly2","kelly3"]),
+//            Advertiser(title: "Royal Cruse", brandName: "Your Next Vication", posterPhotoName: "Cruse"),
+//            User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1","jane2","jane3"])
+//        ] as [producesCardViewModel]
+//        let viewModels = producers.map({return $0.toCardViewModel()})
+//        return viewModels
+//    }()
+    
+    var cardViewModels = [CardViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +36,23 @@ class HomeController: UIViewController {
         HomeScreenView.setupHomeScreenLayout(view: view, topStackView: topStackView, buttonsStackView: buttonsStackView,cardDeckView: cardDeckView)
         
         setupCards()
+        fetchUsersFromFirestore()
         
+    }
+    
+    fileprivate func fetchUsersFromFirestore(){
+        Firestore.firestore().collection("users").getDocuments { (snapshot, err) in
+            if let err = err{
+                print("Failed to fetch users. ",err)
+                return
+            }
+            snapshot?.documents.forEach({ (documentSnapshot) in
+                let userDictionary = documentSnapshot.data()
+                let user = User(dictionary: userDictionary)
+                self.cardViewModels.append(user.toCardViewModel())
+            })
+            self.setupCards()
+        }
     }
     
     @objc func handleSettings(){

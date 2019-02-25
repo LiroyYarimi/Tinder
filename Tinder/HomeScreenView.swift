@@ -13,6 +13,8 @@ class HomeScreenView {
 //    let edgeSpace: CGFloat = 12
     
     static func setupHomeScreenLayout(view: UIView, topStackView: TopNavigationStackView, buttonsStackView: HomeBottomControlsStackView, cardDeckView : UIView){
+        
+        view.backgroundColor = .white
                 
         let overallStackView = UIStackView(arrangedSubviews: [topStackView,cardDeckView,buttonsStackView])
         overallStackView.axis = .vertical
