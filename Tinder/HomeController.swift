@@ -8,11 +8,12 @@
 
 import UIKit
 import Firebase
+import JGProgressHUD
 
 class HomeController: UIViewController {
     
     let topStackView = TopNavigationStackView()
-    let buttonsStackView = HomeBottomControlsStackView()
+    let bottomControls = HomeBottomControlsStackView()
     let cardDeckView = UIView()
     
     
@@ -33,15 +34,31 @@ class HomeController: UIViewController {
         
         topStackView.settingButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         
-        HomeScreenView.setupHomeScreenLayout(view: view, topStackView: topStackView, buttonsStackView: buttonsStackView,cardDeckView: cardDeckView)
+        bottomControls.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
         
-        setupCards()
+        HomeScreenView.setupHomeScreenLayout(view: view, topStackView: topStackView, buttonsStackView: bottomControls,cardDeckView: cardDeckView)
+        
+        setupFirestoreUserCards()
         fetchUsersFromFirestore()
         
     }
     
+    @objc fileprivate func handleRefresh(){
+        fetchUsersFromFirestore()
+    }
+    
+    var lastFetchedUser: User?
+    let numberOfUserToFetch : Int = 2 //get 2 user every time (save user intarnet data)
+    
     fileprivate func fetchUsersFromFirestore(){
-        Firestore.firestore().collection("users").getDocuments { (snapshot, err) in
+        
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Fetching Users"
+        hud.show(in: view)
+        
+        let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchedUser?.uid ?? ""]).limit(to: numberOfUserToFetch)
+        query.getDocuments { (snapshot, err) in
+            hud.dismiss()
             if let err = err{
                 print("Failed to fetch users. ",err)
                 return
@@ -50,19 +67,27 @@ class HomeController: UIViewController {
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
                 self.cardViewModels.append(user.toCardViewModel())
+                self.lastFetchedUser = user
+                self.setupCardFromUser(user: user)
             })
-            self.setupCards()
+//            self.setupFirestoreUserCards()
         }
     }
     
+    fileprivate func setupCardFromUser(user: User){
+        let cardView = CardView(frame: .zero)
+        cardView.cardViewModel = user.toCardViewModel()
+        cardDeckView.addSubview(cardView)
+        cardDeckView.sendSubviewToBack(cardView)
+        cardView.fillSuperview()
+    }
+    
     @objc func handleSettings(){
-//        print("show setting")
-        
         let registrationController = RegistrationController()
         present(registrationController, animated:  true)
     }
 
-    fileprivate func setupCards(){
+    fileprivate func setupFirestoreUserCards(){
         
         cardViewModels.forEach { (cardVM) in
             let cardView = CardView(frame: .zero)

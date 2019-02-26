@@ -24,11 +24,8 @@ struct User: producesCardViewModel {
         self.name = dictionary["fullName"] as? String ?? ""
         self.age = dictionary["age"] as? Int
         self.profession = dictionary["profession"] as? String
-        
         self.imageUrl1 = dictionary["imageUrl1"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
-//        self.imageUrl1 = imageUrl1
-//        self.imageNames = [imageUrl1]
     }
     
     func toCardViewModel()-> CardViewModel{
